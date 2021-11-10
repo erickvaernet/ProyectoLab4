@@ -36,19 +36,32 @@
                     <div class="form-serv-indiv" style="width: 70%;">
                        
                     <?php
-                        $tiempo=$_REQUEST['tiempo'];    
+                        $tiempo_actual=$_REQUEST['tiempo'];    
                         $id_usuario=$_SESSION['id_usuario'];
                         $sql = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
                         $query=mysqli_query($enlace,$sql);
                         $error=0;
                         if(mysqli_num_rows($query)>0){
-                            
+                            $datos= mysqli_fetch_array($query);
+                            $mejor_tiempo=intval(preg_replace(":","",$datos));                            
+                            $tiempo_actual_sf=intval(preg_replace(":","",$tiempo_actual));     
+                            if($tiempo_actual_sf>$mejor_tiempo){
+                                $sql = "UPDATE usuarios SET mejor_tiempo='$tiempo_actual' WHERE id_usuario= $id_usuario";                                
+                                if(mysqli_query($enlace,$sql)){
+                                    $mensaje="Felicidades es tu mejor tiempo, tu tiempo es de ". $tiempo_actual;
+                                }                              
+                                else{
+                                    $error=1;
+                                    $mensaje="Lo siento hubo algun problema en la consulta, contacte con el administrador";                                
+                                }    
+                            }else{
+                                $mensaje="lo siento, tu tiempo actual es de ". $tiempo_actual . " pero tu mejor tiempo fue de ". $mejor_tiempo;
+                            }                           
                         }
                         else{
                             $error=1;
                             $mensaje="Error en la consulta";
                         }
-
 
                         if($error==0) print "<div class='mensaje_exito_grande'> $mensaje </div>";
                         else print "<div class='mensaje_error_grande'> $mensaje </div>";
