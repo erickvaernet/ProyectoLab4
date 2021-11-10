@@ -43,9 +43,10 @@
                         $error=0;
                         if(mysqli_num_rows($query)>0){
                             $datos= mysqli_fetch_array($query);
-                            $mejor_tiempo=intval(preg_replace(":","",$datos));                            
-                            $tiempo_actual_sf=intval(preg_replace(":","",$tiempo_actual));     
-                            if($tiempo_actual_sf>$mejor_tiempo){
+                            $mejor_tiempo=$datos['mejor_tiempo'];
+                            $mejor_tiempo_sf=intval(preg_replace(":","",$mejor_tiempo));                            
+                            $tiempo_actual_sf=intval(preg_replace(":","",$tiempo_actual));                                 
+                            if($tiempo_actual_sf>$mejor_tiempo_sf){
                                 $sql = "UPDATE usuarios SET mejor_tiempo='$tiempo_actual' WHERE id_usuario= $id_usuario";                                
                                 if(mysqli_query($enlace,$sql)){
                                     $mensaje="Felicidades es tu mejor tiempo, tu tiempo es de ". $tiempo_actual;
@@ -55,7 +56,9 @@
                                     $mensaje="Lo siento hubo algun problema en la consulta, contacte con el administrador";                                
                                 }    
                             }else{
-                                $mensaje="lo siento, tu tiempo actual es de ". $tiempo_actual . " pero tu mejor tiempo fue de ". $mejor_tiempo;
+                                $mejor_tiempo=="99:59:59"?
+                                    $mensaje="Felicidades por ser tu primera vez jugando, tu tiempo es de ". $tiempo_actual :
+                                    $mensaje="lo siento, tu tiempo actual es de ". $tiempo_actual . " pero tu mejor tiempo fue de ". $mejor_tiempo;
                             }                           
                         }
                         else{
