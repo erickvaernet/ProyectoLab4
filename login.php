@@ -67,7 +67,8 @@
                                         $_SESSION['nombre']=$datos['nombre'];
                                         $_SESSION['apellido']=$datos['apellido'];                                        
                                         $_SESSION['email']=$datos['email'];
-                                        $_SESSION['sexo']=$datos['sexos_id_sexo']==0? "masculino":"femenino";
+                                        $_SESSION['sexo_id']=$datos['sexos_id_sexo'];
+                                        $_SESSION['mejor_tiempo']=$datos['mejor_tiempo'];
                                         
                                         header('Location: mensaje.php?msj=1');
                                         //print "<p style='font-size: 4rem;'>exito </p>";

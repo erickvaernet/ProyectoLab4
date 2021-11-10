@@ -36,35 +36,33 @@
                     <div class="form-serv-indiv" style="width: 70%;">
                        
                     <?php
-                        $tiempo_actual=$_REQUEST['tiempo'];    
+                        $error=0;  
                         $id_usuario=$_SESSION['id_usuario'];
-                        $sql = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
-                        $query=mysqli_query($enlace,$sql);
-                        $error=0;
-                        if(mysqli_num_rows($query)>0){
-                            $datos= mysqli_fetch_array($query);
-                            $mejor_tiempo=$datos['mejor_tiempo'];
-                            $mejor_tiempo_sf=intval(preg_replace(":","",$mejor_tiempo));                            
-                            $tiempo_actual_sf=intval(preg_replace(":","",$tiempo_actual));                                 
-                            if($tiempo_actual_sf>$mejor_tiempo_sf){
-                                $sql = "UPDATE usuarios SET mejor_tiempo='$tiempo_actual' WHERE id_usuario= $id_usuario";                                
-                                if(mysqli_query($enlace,$sql)){
-                                    $mensaje="Felicidades es tu mejor tiempo, tu tiempo es de ". $tiempo_actual;
-                                }                              
-                                else{
-                                    $error=1;
-                                    $mensaje="Lo siento hubo algun problema en la consulta, contacte con el administrador";                                
-                                }    
-                            }else{
-                                $mejor_tiempo=="99:59:59"?
-                                    $mensaje="Felicidades por ser tu primera vez jugando, tu tiempo es de ". $tiempo_actual :
-                                    $mensaje="lo siento, tu tiempo actual es de ". $tiempo_actual . " pero tu mejor tiempo fue de ". $mejor_tiempo;
-                            }                           
+                        $tiempo_actual=$_REQUEST['tiempo'];  
+                        $mejor_tiempo=$_SESSION['mejor_tiempo'];
+
+                        $mejor_tiempo_sf=intval(str_replace(":","",$mejor_tiempo));                            
+                        $tiempo_actual_sf=intval(str_replace(":","",$tiempo_actual));                                 
+                        if($tiempo_actual_sf<$mejor_tiempo_sf){
+                            $sql = "UPDATE usuarios SET mejor_tiempo='$tiempo_actual' WHERE id_usuario= $id_usuario";                                
+                            if(mysqli_query($enlace,$sql)){
+                                $mensaje="Felicidades es tu mejor tiempo, tu tiempo es de ". $tiempo_actual . " mientras que el anterior era de " . $mejor_tiempo;
+                                $_SESSION['mejor_tiempo']=$tiempo_actual;
+                            }                              
+                            else{
+                                $error=1;
+                                $mensaje="Lo siento hubo algun problema en la consulta, contacte con el administrador";                                
+                            }    
                         }
-                        else{
-                            $error=1;
-                            $mensaje="Error en la consulta";
+                        else if($tiempo_actual_sf==$mejor_tiempo_sf){
+                            $mensaje="Obtuviste la misma puntuacion de tiempo que  la vez anterior: ". $tiempo_actual;
                         }
+                        else{                            
+                            $mejor_tiempo=="99:59:59"?
+                                $mensaje="Felicidades por ser tu primera vez jugando, tu tiempo es de ". $tiempo_actual ."DEF:" . $mejor_tiempo ." mejor t sf:". $mejor_tiempo_sf . " tiempactsf: ". $tiempo_actual_sf :
+                                $mensaje="lo siento, tu tiempo actual es de ". $tiempo_actual . " pero tu mejor tiempo fue de ". $mejor_tiempo;
+                        }                           
+                        
 
                         if($error==0) print "<div class='mensaje_exito_grande'> $mensaje </div>";
                         else print "<div class='mensaje_error_grande'> $mensaje </div>";

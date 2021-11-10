@@ -43,8 +43,7 @@
                                 $error=0;
                                 break;
                             case '2':
-                                $mensaje="No puede pedir un turno sin haberse logueado, lo puede hacer -><a href='./login.php'>aquí</a><-
-                                <br>En caso de no tener una cuenta puede registrarse -><a href='./signup.php'>aquí</a><-";
+                                $mensaje="No deberias estar aqui sin loguearte, entra -><a href='./signup.php'>aquí</a><-";
                                 $error=1;
                                 break;    
                             case '3':
@@ -54,12 +53,7 @@
                             case '4':
                                 $mensaje="La cuenta se ha creado con exito, puede ingresar a ella desde -><a href='./login.php'>aquí</a><-";
                                 $error=0;
-                                break;                                                                        
-                            case '5':
-                                //$mensaje="Se creo el Turno con exito para el ".$fecha."hs";
-                                $mensaje="Se creo el Turno con exito ";
-                                $error=0;
-                                break;                     
+                                break;              
                             default:
                                 $msj_error="ERROR";
                                 $error=1;
