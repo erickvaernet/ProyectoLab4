@@ -762,3 +762,11 @@ footer .servicios i {
   }
 }
 /*# sourceMappingURL=style.css.map */
+
+
+/*--------PERFIL--------*/
+div.atrib_perfil{
+  font-size: 1.5rem;
+  color: green;
+
+}

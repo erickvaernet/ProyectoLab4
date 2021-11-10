@@ -4,7 +4,7 @@
     if(!$_SESSION['activa']) header('Location: mensaje.php?msj=2');
     else{
         $nombre= $_SESSION['nombre'];
-        $nombre= $_SESSION['apellido'];                                     
+        $apellido= $_SESSION['apellido'];                                     
         $email=$_SESSION['email'];
         $sexo_id=$_SESSION['id_sexo'];
         $mejor_tiempop=$_SESSION['mejor_tiempo'];
@@ -22,6 +22,13 @@
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/style.css">
+    <style>
+        div.atrib_perfil{
+            font-size: 2rem;
+            color: white;
+            line-height: 2.5rem;            
+        }
+    </style>
 </head>
 <body class="fondo fondo-contacto" style="height: 100vh;">
     <div >
@@ -37,33 +44,49 @@
             </nav>
         </header>
         <main>
-            <div class="contenedor-centrador" style="margin-top: 150px;">
-                <div class="contenedor-contacto" style="width: 800px;">
+            <div class="contenedor-centrador" style="position:relative; bottom:50px">
+                <div class="contenedor-contacto" style="width: 700px;">
                     <form action="#" method="POST" class="form-serv-indiv" style="width: 70%;">
                         <h3 style="font-size:2rem; text-decoration:underline; margin:15px">Mi Perfil</h3>
                         <div class="description">¡Bienvenido!</div>
-                                               
-                        <img src="./img/avatar_m.jpg" alt="Avatar Masculino">
+                        <div style='text-align:center'>                        
+                            <?php      
+                                if($sexo_id==0){
+                                    print "<img src='./img/avatar_m.jpg' alt='Avatar Masculino' style='max-width:300px'>";                                    
+                                }
+                                else{                                
+                                    print "<img src='./img/avatar_f.jpg' alt='Avatar Femenino'>";                                   
+                                }                            
 
-                        <label for="email">contraseña nueva:</label>
-                        <input type="email" name="email" id="email" placeholder="Ingrese su e-mail">
+                                print "<p style='text-decoration:underline;position:relative;left: 20px'>$nombre, $apellido</p>"
+                            ?> 
+                            
+                        </div>
 
                         <div>
-                            <h2>Nombre:</h2>
+                            <div class='atrib_perfil'>Mejor Puntuacion:</div>     
                             <?php      
-                            print "<p>$nombre</p>";
+                            print "<div>$mejor_tiempop</div>";
+                            ?>
+                        </div>
+
+                        <div>
+                            <div class='atrib_perfil'>email:</div>     
+                            <?php      
+                            print "<div>$email</div>";
+                            ?>
+                        </div>
+
+                        
+                        <div>
+                            <div class='atrib_perfil'>Sexo:</div>
+                            <?php      
+                            $sexo_id==0?
+                                print "<div>Masculino</div>":
+                                print "<div>Femenino</div>";
                             ?> 
                         </div>
                         
-                        <div>
-                            <h2>Apelido:</h2>                            
-
-                        </div>
-
-                        <div class="contenedor-btn" style="margin-top: 30px;">
-                            <input id="enviar" type="submit" value="Ingresar" name="enviar" style="width: 50%;">
-                            <a href="./signup.php" style="width: 50%;"><input type="button" value="registrarse" style="width: 100%;"></a>
-                        </div>
 
                     </form>
 
