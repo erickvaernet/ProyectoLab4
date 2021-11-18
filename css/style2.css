@@ -154,3 +154,35 @@ div {
     }
 }
 
+table{
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid purple
+}
+
+head th:nth-child(1) {
+    width: 30%;
+  }
+  
+  thead th:nth-child(2) {
+    width: 20%;
+  }
+  
+  thead th:nth-child(3) {
+    width: 15%;
+  }
+  
+  thead th:nth-child(4) {
+    width: 35%;
+  }
+  
+  th, td {
+    border: solid black;
+    padding: 20px;
+    font-size: 1.5rem;
+  }
+  .titular{
+    font-size: 2rem;
+    font-weight: bold;
+  }

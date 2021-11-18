@@ -1,10 +1,11 @@
 <?php
-    require "database.php";
-    session_start();
-    if(!$_SESSION['activa']) header('Location: login.php');
+require "database.php";
+session_start();
+if (!$_SESSION['activa']) header('Location: login.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,11 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="./css/style2.css">
 </head>
-<body class="fondo fondo-contacto">    
+
+<body class="fondo fondo-contacto">
     <header>
         <nav>
             <ul>
-                <li><a href="./index.php">Inicio</a></li>                    
+                <li><a href="./index.php">Inicio</a></li>
                 <li><a href="./top-jugadores.php">Top Jugadores</a></li>
                 <li><a href="./perfil.php">Perfil</a></li>
                 <li><a href="./logout.php">Cerrar Sesion</a></li>
@@ -25,27 +27,16 @@
             </ul>
         </nav>
     </header>
-    <main class="juego">
-        
-        <div id="tablero" class="juego">
-        </div>
-
-        <br>
-
-        <div class="nuevo-juego" id="nuevo-juego" style="width: 298px;height: 145px;font-size: 2rem; font-weight: 700; padding: 50px;margin: 100px 0 100px 0;">
-            Nuevo Juego
-        </div>
-
-        <!---top-->
-        
-        <table style;" >            
+    <main>
+        <table >            
             <tr>
                 <td class="titular">puesto</td>
                 <td class="titular">nombre</td>
                 <td class="titular">apellido</td>
                 <td class="titular">puntuacion</td>
             </tr>
-        <?php        
+        <?php
+        
         $sql = "SELECT nombre, apellido, mejor_tiempo FROM usuarios ORDER BY mejor_tiempo ASC LIMIT 10";        
         //$mysqli = new mysqli($servidor,$usuario,$clave,$baseDeDatos);
         $resultado=$enlace->query($sql) ;
@@ -66,11 +57,12 @@
                 </tr>"  ;              
             }
         }
-        else print "ERRROR"            
-        ?>       
-        </table>
+        else print "ERRROR"
+            
+        ?>        
 
+        </table>
     </main>
 </body>
-<script src="./js/main.js"></script>
+
 </html>

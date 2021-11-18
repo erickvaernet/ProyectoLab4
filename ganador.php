@@ -84,11 +84,11 @@
 
                     <div class="redes">
                         Seguinos en
-                        <a href="https://www.facebook.com/Spa-Sentirse-Bien" target="_blank"><i
+                        <a href="https://www.twitter.com/Team-Desarrollo" target="_blank"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.twitter.com/Spa-Sentirse-Bien" target="_blank"><i
+                        <a href="https://www.twitter.com/Team-Desarrollo" target="_blank"><i
                                 class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/Spa-Sentirse-Bien" target="_blank"><i
+                        <a href="https://www.twitter.com/Team-Desarrollo" target="_blank"><i
                                 class="fab fa-instagram"></i></a>                                
                     </div>
                 </div>
